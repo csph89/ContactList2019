@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ContactList.Models.Contact>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Contacts</h2>
+
+@if (!Model.Any())
+{
+    <p>There are not any contacts yet.</p>
+}
+else
+{
+    <table id="customers" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in Model)
+            {
+                <tr>
+                    <td>@contact.Name</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.Address</td>
+                    <td>@contact.Phone</td>
+                    <td>
+                        <span>@Html.ActionLink("Edit", "Edit", "Contacts", new { id = contact.Id }, null) | </span>
+                        <span>@Html.ActionLink("Delete", "Delete", "Contacts", new { id = contact.Id }, null)</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<input class="btn btn-primary" type="button" value="New Contact" onclick="location.href='@Url.Action("Create", "Contacts")'" />

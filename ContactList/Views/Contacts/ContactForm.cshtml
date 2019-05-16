@@ -1,0 +1,33 @@
+﻿@model ContactList.Models.Contact
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Form</h2>
+
+@using (Html.BeginForm("Save", "Contacts"))
+{
+    <div class="form-group">
+        @Html.LabelFor(c => Model.Name)
+        @Html.TextBoxFor(c => Model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => Model.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => Model.Email)
+        @Html.TextBoxFor(c => Model.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => Model.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => Model.Address)
+        @Html.TextBoxFor(c => Model.Address, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => Model.Phone)
+        @Html.TextBoxFor(c => Model.Phone, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(c => Model.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
